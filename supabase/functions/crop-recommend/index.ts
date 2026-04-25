@@ -1,7 +1,8 @@
 import { corsHeaders } from "../_shared/cors.ts";
+import { languageName } from "../_shared/lang.ts";
 
 interface Body {
-  language?: "en" | "hi";
+  language?: string;
   location?: { lat: number; lon: number; name?: string };
   soil?: {
     ph?: number;
@@ -70,7 +71,7 @@ Deno.serve(async (req) => {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY not configured");
 
-    const lang = body.language === "hi" ? "Hindi (Devanagari)" : "English";
+    const lang = languageName(body.language);
     const sys = `You are KrishiMitra, an expert agronomist for Indian farmers. Recommend crops grounded in the provided soil, weather, location and season. Estimate realistic yields and profits in INR using typical Indian mandi prices. Sustainability considers water use, soil health and chemical input. Respond in ${lang} for all human-readable text fields (summary, localName, reasons, tips). Crop "name" stays in English.`;
 
     const userPrompt = `Farmer context:\n${JSON.stringify(body, null, 2)}\n\nReturn 3-5 best-fit crops.`;

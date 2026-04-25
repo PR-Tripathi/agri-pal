@@ -59,7 +59,7 @@ const Home = () => {
         <div className="relative p-5 text-primary-foreground">
           <p className="font-display text-2xl font-bold leading-tight">{t("goodMorning")}</p>
           <p className="text-sm opacity-90 mt-1">
-            {place ?? (lang === "hi" ? "अपने खेत के लिए सबसे अच्छा सुझाव पाएं" : "Personalized advice for your farm")}
+            {place ?? t("heroSubtitle")}
           </p>
         </div>
       </section>
@@ -121,7 +121,7 @@ const Home = () => {
       </section>
 
       <p className="mt-6 mb-2 text-center text-[11px] text-muted-foreground">
-        {lang === "hi" ? "खेत में मेहनत — हम सलाह में 🌾" : "You grow it. We guide it. 🌾"}
+        {t("footerLine")}
       </p>
     </AppShell>
   );

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import type { Lang } from "@/i18n/strings";
+import { LANGS, type Lang } from "@/i18n/strings";
 import { t as translate } from "@/i18n/strings";
 
 interface Ctx {
@@ -9,11 +9,12 @@ interface Ctx {
 }
 
 const LangContext = createContext<Ctx | null>(null);
+const VALID = new Set(LANGS.map((l) => l.code));
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => {
-    const saved = localStorage.getItem("km_lang");
-    return (saved === "hi" || saved === "en") ? saved : "en";
+    const saved = localStorage.getItem("km_lang") as Lang | null;
+    return saved && VALID.has(saved) ? saved : "en";
   });
 
   useEffect(() => {
@@ -33,3 +34,4 @@ export function useLang() {
   if (!ctx) throw new Error("useLang must be inside LanguageProvider");
   return ctx;
 }
+

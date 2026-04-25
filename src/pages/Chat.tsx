@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Mic, MicOff, Send, Volume2, Sprout } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { useSpeechRecognition, speak } from "@/lib/speech";
+import { getLangMeta } from "@/i18n/strings";
 import { toast } from "sonner";
 
 interface Msg { role: "user" | "assistant"; content: string }
@@ -27,7 +28,7 @@ const Chat = () => {
   }, [messages]);
 
   const { supported, listening, start, stop } = useSpeechRecognition({
-    lang: lang === "hi" ? "hi-IN" : "en-IN",
+    lang: getLangMeta(lang).bcp47,
     onResult: (text, isFinal) => {
       setInput(text);
       if (isFinal) setTimeout(() => send(text), 200);
@@ -101,9 +102,7 @@ const Chat = () => {
     } finally { setLoading(false); }
   };
 
-  const suggestions = lang === "hi"
-    ? ["गेहूं की बुवाई कब करूं?", "मेरे टमाटर के पत्ते पीले क्यों हैं?", "धान का बाज़ार भाव क्या है?"]
-    : ["When should I sow wheat?", "Why are my tomato leaves yellow?", "How to control aphids organically?"];
+  const suggestions = [t("suggestion1"), t("suggestion2"), t("suggestion3")];
 
   return (
     <AppShell title={t("chatTitle")}>
@@ -143,7 +142,7 @@ const Chat = () => {
                       onClick={() => speak(m.content, lang)}
                       className="mt-1.5 text-xs text-primary inline-flex items-center gap-1 font-semibold"
                     >
-                      <Volume2 className="h-3 w-3" /> {lang === "hi" ? "सुनें" : "Listen"}
+                      <Volume2 className="h-3 w-3" /> {t("listen")}
                     </button>
                   )}
                 </div>
