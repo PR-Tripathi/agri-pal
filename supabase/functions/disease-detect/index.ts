@@ -1,8 +1,9 @@
 import { corsHeaders } from "../_shared/cors.ts";
+import { languageName } from "../_shared/lang.ts";
 
 interface Body {
   imageBase64: string; // data URL or raw base64
-  language?: "en" | "hi";
+  language?: string;
   cropHint?: string;
 }
 
@@ -46,7 +47,7 @@ Deno.serve(async (req) => {
       ? body.imageBase64
       : `data:image/jpeg;base64,${body.imageBase64}`;
 
-    const lang = body.language === "hi" ? "Hindi (Devanagari)" : "English";
+    const lang = languageName(body.language);
     const sys = `You are an expert plant pathologist for Indian crops. Examine the image and diagnose disease, pest or deficiency. If it is not a plant, set isPlant=false. Respond in ${lang} for all human-readable text. Disease name stays in English with local term in parentheses if useful.`;
 
     const userParts: any[] = [

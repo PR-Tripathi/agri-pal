@@ -1,7 +1,8 @@
 import { corsHeaders } from "../_shared/cors.ts";
+import { languageName } from "../_shared/lang.ts";
 
 interface Msg { role: "user" | "assistant"; content: string }
-interface Body { messages: Msg[]; language?: "en" | "hi" }
+interface Body { messages: Msg[]; language?: string }
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
@@ -11,7 +12,7 @@ Deno.serve(async (req) => {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY not configured");
 
-    const lang = body.language === "hi" ? "Hindi (Devanagari script)" : "English";
+    const lang = languageName(body.language);
     const system = `You are KrishiMitra (कृषि मित्र), a warm, practical AI assistant for Indian farmers. Always reply in ${lang}. Use simple words a smallholder farmer would understand. Cover crops, soil, water, pests, fertilizer, weather, market prices, government schemes. Keep answers short (3-6 sentences) unless asked for detail. Use bullet points when listing steps. Never invent numbers — say "approximately" when uncertain.`;
 
     const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
