@@ -47,12 +47,14 @@ export function useSpeechRecognition({ lang = "en-IN", onResult }: Options = {})
   return { supported, listening, start, stop };
 }
 
-export function speak(text: string, lang: "hi" | "en" = "en") {
+import { getLangMeta, type Lang } from "@/i18n/strings";
+
+export function speak(text: string, lang: Lang = "en") {
   if (typeof window === "undefined" || !window.speechSynthesis) return;
   try {
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = lang === "hi" ? "hi-IN" : "en-IN";
+    u.lang = getLangMeta(lang).bcp47;
     u.rate = 1;
     window.speechSynthesis.speak(u);
   } catch {}
