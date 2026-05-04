@@ -1,0 +1,10 @@
+project_id = "bnxcwyidixpouvomqggl"
+
+[functions.crop-recommend]
+verify_jwt = false
+
+[functions.disease-detect]
+verify_jwt = false
+
+[functions.assistant-chat]
+verify_jwt = false

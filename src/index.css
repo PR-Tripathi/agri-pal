@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* KrishiMitra design system — earthy & friendly. All colors HSL. */
+
+@layer base {
+  :root {
+    --background: 44 38% 96%;
+    --foreground: 30 25% 15%;
+
+    --card: 40 35% 98%;
+    --card-foreground: 30 25% 15%;
+
+    --popover: 40 35% 98%;
+    --popover-foreground: 30 25% 15%;
+
+    /* Deep leaf green */
+    --primary: 130 35% 28%;
+    --primary-foreground: 44 38% 96%;
+    --primary-glow: 120 40% 45%;
+
+    /* Warm wheat */
+    --secondary: 38 55% 88%;
+    --secondary-foreground: 30 35% 22%;
+
+    --muted: 40 25% 90%;
+    --muted-foreground: 30 15% 40%;
+
+    /* Terracotta accent */
+    --accent: 18 65% 55%;
+    --accent-foreground: 44 38% 96%;
+
+    --destructive: 0 70% 48%;
+    --destructive-foreground: 44 38% 96%;
+
+    --success: 130 50% 38%;
+    --success-foreground: 44 38% 96%;
+
+    --warning: 38 90% 50%;
+    --warning-foreground: 30 35% 15%;
+
+    --border: 38 25% 82%;
+    --input: 38 25% 82%;
+    --ring: 130 35% 28%;
+
+    --radius: 1rem;
+
+    --gradient-hero: linear-gradient(135deg, hsl(130 35% 28%) 0%, hsl(120 40% 45%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(38 80% 70%) 0%, hsl(18 65% 60%) 100%);
+    --gradient-soil: linear-gradient(180deg, hsl(38 55% 92%) 0%, hsl(38 55% 85%) 100%);
+
+    --shadow-soft: 0 4px 20px -8px hsl(30 35% 25% / 0.18);
+    --shadow-warm: 0 10px 30px -10px hsl(18 65% 40% / 0.35);
+    --shadow-leaf: 0 12px 32px -12px hsl(130 50% 25% / 0.4);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 44 38% 96%;
+    --sidebar-foreground: 30 25% 15%;
+    --sidebar-primary: 130 35% 28%;
+    --sidebar-primary-foreground: 44 38% 96%;
+    --sidebar-accent: 40 25% 90%;
+    --sidebar-accent-foreground: 30 25% 15%;
+    --sidebar-border: 38 25% 82%;
+    --sidebar-ring: 130 35% 28%;
+  }
+
+  .dark {
+    --background: 30 20% 8%;
+    --foreground: 44 38% 92%;
+    --card: 30 20% 12%;
+    --card-foreground: 44 38% 92%;
+    --popover: 30 20% 12%;
+    --popover-foreground: 44 38% 92%;
+    --primary: 120 40% 55%;
+    --primary-foreground: 30 20% 8%;
+    --secondary: 30 15% 20%;
+    --secondary-foreground: 44 38% 92%;
+    --muted: 30 15% 18%;
+    --muted-foreground: 38 15% 65%;
+    --accent: 18 65% 55%;
+    --accent-foreground: 44 38% 96%;
+    --destructive: 0 70% 48%;
+    --destructive-foreground: 44 38% 96%;
+    --border: 30 15% 22%;
+    --input: 30 15% 22%;
+    --ring: 120 40% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', system-ui, sans-serif;
+  }
+  h1, h2, h3, .font-display {
+    font-family: 'Fraunces', 'Noto Sans Devanagari', Georgia, serif;
+    font-feature-settings: "ss01";
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .gradient-hero { background-image: var(--gradient-hero); }
+  .gradient-warm { background-image: var(--gradient-warm); }
+  .gradient-soil { background-image: var(--gradient-soil); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-warm { box-shadow: var(--shadow-warm); }
+  .shadow-leaf { box-shadow: var(--shadow-leaf); }
+  .transition-smooth { transition: var(--transition-smooth); }
+}
